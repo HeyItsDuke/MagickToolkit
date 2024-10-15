@@ -2,7 +2,7 @@
 setlocal enabledelayedexpansion
 
 rem Set the target resolution heading
-set "target_resolution=convert_png"
+set "target_resolution=convert_tga"
 
 rem Read the paths from the paths.txt file
 set "path_file=%~dp0paths.txt"
@@ -52,13 +52,13 @@ set "imagemagick_path=%~dp0bin\magick.exe"
 
 rem Create the output folder if it doesn't exist
 mkdir "%output_folder%"
-set "non_png_found=0"
+set "non_tga_found=0"
 
-rem Recursively scan for non-PNG files
+rem Recursively scan for non-TGA files
 for /R "%input_folder%" %%f in (*.*) do (
-    if /I not "%%~xf"==".png" (
-        rem Set the flag to indicate that a non-PNG file was found
-        set "non_png_found=1"
+    if /I not "%%~xf"==".tga" (
+        rem Set the flag to indicate that a non-TGA file was found
+        set "non_tga_found=1"
 
         rem Get the relative path by removing the input folder prefix from the file path
         set "relative_path=%%f"
@@ -71,15 +71,15 @@ for /R "%input_folder%" %%f in (*.*) do (
         rem Create the corresponding output subdirectory in the converted folder if it doesn't exist
         mkdir "%output_folder%\!relative_dir!" 2>nul
 
-        rem Convert the non-PNG file to PNG
-        %imagemagick_path% "%%f" "%output_folder%\!relative_dir!%%~nf.png"
+        rem Convert the non-TGA file to TGA
+        %imagemagick_path% "%%f" "%output_folder%\!relative_dir!%%~nf.tga"
     )
 )
 
-rem Create the converted folder only if non-PNG files were found
-if !non_png_found! == 1 mkdir "%output_folder%\converted" 2>nul
+rem Create the converted folder only if non-TGA files were found
+if !non_tga_found! == 1 mkdir "%output_folder%\converted" 2>nul
 
-echo Batch conversion for non-PNGs completed!
+echo Batch conversion for non-TGAs completed!
 pause
 
 

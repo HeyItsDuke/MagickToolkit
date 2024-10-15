@@ -52,10 +52,10 @@ set "imagemagick_path=%~dp0bin\magick.exe"
 
 rem Create the output folder if it doesn't exist
 mkdir "%output_folder%"
-set "non_png_found=0"
+set "non_tga_found=0"
 
-rem Recursively scan for PNG files
-for /R "%input_folder%" %%f in (*.png) do (
+rem Recursively scan for TGA files
+for /R "%input_folder%" %%f in (*.tga) do (
     rem Get the relative path by removing the input folder prefix from the file path
     set "relative_path=%%f"
     set "relative_path=!relative_path:%input_folder%=!"
@@ -67,15 +67,15 @@ for /R "%input_folder%" %%f in (*.png) do (
     rem Create the corresponding output subdirectory if it doesn't exist
     mkdir "%output_folder%\!relative_dir!" 2>nul
 
-    rem Resize the PNG file and place it in the corresponding subfolder
+    rem Resize the TGA file and place it in the corresponding subfolder
     %imagemagick_path% "%%f" -resize 512x512 "%output_folder%\!relative_dir!%%~nxf"
 )
 
-rem Recursively scan for non-PNG files
+rem Recursively scan for non-TGA files
 for /R "%input_folder%" %%f in (*.*) do (
-    if /I not "%%~xf"==".png" (
-        rem Set the flag to indicate that a non-PNG file was found
-        set "non_png_found=1"
+    if /I not "%%~xf"==".tga" (
+        rem Set the flag to indicate that a non-TGA file was found
+        set "non_tga_found=1"
 
         rem Get the relative path by removing the input folder prefix from the file path
         set "relative_path=%%f"
@@ -88,13 +88,13 @@ for /R "%input_folder%" %%f in (*.*) do (
         rem Create the corresponding output subdirectory in the converted folder if it doesn't exist
         mkdir "%output_folder%\!relative_dir!" 2>nul
 
-        rem Convert the non-PNG file to PNG and resize it
-        %imagemagick_path% "%%f" -resize 512x512 "%output_folder%\!relative_dir!%%~nf.png"
+        rem Convert the non-TGA file to TGA and resize it
+        %imagemagick_path% "%%f" -resize 512x512 "%output_folder%\!relative_dir!%%~nf.tga"
     )
 )
 
-rem Create the converted folder only if non-PNG files were found
-if !non_png_found! == 1 mkdir "%output_folder%\converted" 2>nul
+rem Create the converted folder only if non-TGA files were found
+if !non_tga_found! == 1 mkdir "%output_folder%\converted" 2>nul
 
 echo Batch resize for 512x512 completed!
 pause

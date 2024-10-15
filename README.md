@@ -11,7 +11,7 @@ To use the scripts, place the paths of your input folder and your output folder 
 
 Is this the most optimal way to go about this? I don't know. But it was fun to make and is useful for my needs.
 
-These scripts are licensed under CC0 1.0 Universal. However, ImageMagick has its own license which is included in this toolkit's "bin" dictory for compliance purposes.
+These scripts are licensed under CC0 1.0 Universal. However, ImageMagick has its own license which is included in this toolkit's "bin" directory for compliance purposes.
 This toolkit is NOT licensed under the ImageMagick license.
 
 # Dependencies
@@ -21,4 +21,4 @@ The bundled portable copy of ImageMagick will be updated on a as-needed basis if
 
 # Alternate Branches
 
-This is the primary version of MagickToolkit intended for general purpose usage and focuses on PNG files. You can use the branch selector to view the Red Faction branch, which focuses primarily on TGA files and will work for any project that requires TGA files.
+This is the Red Faction version of MagickToolkit intended for Red Faction modding usage and focuses on TGA files. It will work for any project that requires TGA files. You can use the branch selector to view the primary branch for more general purpose use.

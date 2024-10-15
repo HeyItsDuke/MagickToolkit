@@ -30,15 +30,7 @@ C:\path\to\output\folder
 C:\path\to\input\folder
 C:\path\to\output\folder
 
-# convert_png
-C:\path\to\input\folder
-C:\path\to\output\folder
-
-# convert_webp_lossless
-C:\path\to\input\folder
-C:\path\to\output\folder
-
-# convert_webp_lossy
+# convert_tga
 C:\path\to\input\folder
 C:\path\to\output\folder
 

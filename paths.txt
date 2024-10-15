@@ -1,0 +1,45 @@
+# 512x512
+C:\path\to\input\folder
+C:\path\to\output\folder
+
+# 256x256
+C:\path\to\input\folder
+C:\path\to\output\folder
+
+# 256x128
+C:\path\to\input\folder
+C:\path\to\output\folder
+
+# 128x128
+C:\path\to\input\folder
+C:\path\to\output\folder
+
+# 128x64
+C:\path\to\input\folder
+C:\path\to\output\folder
+
+# 64x64
+C:\path\to\input\folder
+C:\path\to\output\folder
+
+# 64x32
+C:\path\to\input\folder
+C:\path\to\output\folder
+
+# 32x32
+C:\path\to\input\folder
+C:\path\to\output\folder
+
+# convert_png
+C:\path\to\input\folder
+C:\path\to\output\folder
+
+# convert_webp_lossless
+C:\path\to\input\folder
+C:\path\to\output\folder
+
+# convert_webp_lossy
+C:\path\to\input\folder
+C:\path\to\output\folder
+
+

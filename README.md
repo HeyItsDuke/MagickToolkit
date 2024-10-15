@@ -11,7 +11,7 @@ To use the scripts, place the paths of your input folder and your output folder 
 
 Is this the most optimal way to go about this? I don't know. But it was fun to make and is useful for my needs.
 
-These scripts are licensed under CC0 1.0 Universal. However, ImageMagick has its own license which is included in this toolkit's "bin" dictory for compliance purposes.
+These scripts are licensed under CC0 1.0 Universal. However, ImageMagick has its own license which is included in this toolkit's "bin" directory for compliance purposes.
 This toolkit is NOT licensed under the ImageMagick license.
 
 # Dependencies

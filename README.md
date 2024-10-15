@@ -22,3 +22,4 @@ The bundled portable copy of ImageMagick will be updated on a as-needed basis if
 # Alternate Branches
 
 This is the Red Faction version of MagickToolkit intended for Red Faction modding usage and focuses on TGA files. It will work for any project that requires TGA files. You can use the branch selector to view the primary branch for more general purpose use.
+The Red Faction branch will only have releases pushed to FactionFiles: https://www.factionfiles.com/

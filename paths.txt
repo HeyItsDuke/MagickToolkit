@@ -2,6 +2,10 @@
 C:\path\to\input\folder
 C:\path\to\output\folder
 
+# 320x256
+C:\path\to\input\folder
+C:\path\to\output\folder
+
 # 256x256
 C:\path\to\input\folder
 C:\path\to\output\folder

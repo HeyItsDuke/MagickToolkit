@@ -6,6 +6,7 @@ This was developed as a lightweight toolkit to ease my indie game development an
 # Usage
 
 To use the scripts, place the paths of your input folder and your output folder into "paths.txt" so the scripts can read them. Then click them to run.
+You can also use the launcher script for an easy frontend that additionally gives you the option to run all resize scripts at once for mass texture asset processing and resizing.
 
 "convert_png" will simply convert any non-PNG files to PNG format without resizing them. Same with the two WebP conversion scripts.
 

@@ -9,7 +9,7 @@ if /I "%~1"=="/dry-run" (
 )
 
 rem Set the target resolution heading
-set "target_resolution=convert_webp_lossless"
+set "target_resolution=320x256"
 
 rem Read the paths from the paths.txt file
 set "path_file=%~dp0paths.txt"
@@ -64,7 +64,7 @@ if !dry_run! == 0 (
     echo [Dry Run] Would create output folder: "%output_folder%"
 )
 
-set "non_webp_found=0"
+set "non_png_found=0"
 set "paused=0"
 
 rem Function to handle pause/resume/cancel
@@ -86,7 +86,38 @@ if errorlevel 3 (
 )
 exit /b
 
-rem Recursively scan for non-WebP files
+rem Recursively scan for PNG files
+for /R "%input_folder%" %%f in (*.png) do (
+    call :check_controls
+    if !paused! == 1 (
+        choice /c R /n /m "Paused. Press 'R' to resume." >nul
+        set "paused=0"
+    )
+
+    rem Get the relative path by removing the input folder prefix from the file path
+    set "relative_path=%%f"
+    set "relative_path=!relative_path:%input_folder%=!"
+
+    rem Extract the directory portion of the relative path
+    set "relative_dir=%%~dpf"
+    set "relative_dir=!relative_dir:%input_folder%\=!"
+
+    rem Create the corresponding output subdirectory if it doesn't exist (but skip if dry run)
+    if !dry_run! == 0 (
+        mkdir "%output_folder%\!relative_dir!" 2>nul
+    ) else (
+        echo [Dry Run] Would create directory: "%output_folder%\!relative_dir!"
+    )
+
+    rem Resize the PNG file and place it in the corresponding subfolder (but skip if dry run)
+    if !dry_run! == 0 (
+        %imagemagick_path% "%%f" -resize 320x256 "%output_folder%\!relative_dir!%%~nxf"
+    ) else (
+        echo [Dry Run] Would resize PNG: "%%f" to 320x256 and save to "%output_folder%\!relative_dir!%%~nxf"
+    )
+)
+
+rem Recursively scan for non-PNG files
 for /R "%input_folder%" %%f in (*.*) do (
     call :check_controls
     if !paused! == 1 (
@@ -94,9 +125,9 @@ for /R "%input_folder%" %%f in (*.*) do (
         set "paused=0"
     )
 
-    if /I not "%%~xf"==".webp" (
-        rem Set the flag to indicate that a non-WebP file was found
-        set "non_webp_found=1"
+    if /I not "%%~xf"==".png" (
+        rem Set the flag to indicate that a non-PNG file was found
+        set "non_png_found=1"
 
         rem Get the relative path by removing the input folder prefix from the file path
         set "relative_path=%%f"
@@ -113,19 +144,19 @@ for /R "%input_folder%" %%f in (*.*) do (
             echo [Dry Run] Would create directory: "%output_folder%\!relative_dir!"
         )
 
-        rem Convert the non-WebP file to WebP (but skip if dry run)
+        rem Convert the non-PNG file to PNG and resize it (but skip if dry run)
         if !dry_run! == 0 (
-            %imagemagick_path% "%%f" "%output_folder%\!relative_dir!%%~nf.webp" -define webp:lossless=true
+            %imagemagick_path% "%%f" -resize 320x256 "%output_folder%\!relative_dir!%%~nf.png"
         ) else (
-            echo [Dry Run] Would convert file: "%%f" to Lossless WebP, saving to "%output_folder%\!relative_dir!%%~nf.webp" -define webp:lossless=true
+            echo [Dry Run] Would convert and resize file: "%%f" to PNG and resize to 320x256, saving to "%output_folder%\!relative_dir!%%~nf.png"
         )
     )
 )
 
-rem Create the converted folder only if non-WebP files were found (but skip if dry run)
+rem Create the converted folder only if non-PNG files were found (but skip if dry run)
 if !non_png_found! == 1 if !dry_run! == 0 (
     mkdir "%output_folder%\converted" 2>nul
-) else if !non_webp_found! == 1 (
+) else if !non_png_found! == 1 (
     echo [Dry Run] Would create folder: "%output_folder%\converted"
 )
 

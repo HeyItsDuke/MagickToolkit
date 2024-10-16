@@ -5,3 +5,4 @@ v1b:
 Added option for dry run.
 Added pause, resume and cancel functions.
 Added launcher frontend batch script with mass texture resize function.
+Added 320x256 script.
